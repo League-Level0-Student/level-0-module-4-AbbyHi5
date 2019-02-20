@@ -1,30 +1,135 @@
 package charAt_scanners_optionDialogs;
 import javax.swing.JOptionPane;
-
 public class HappyPet {
+
+	static int happinessLevel = 0;
+	static int timeplay = 1;
+	static int timefeed = 1;
+	static int timefromfeed = 0;
+	static String pet = JOptionPane.showInputDialog(null, "Welcome to the Tarrasque pet store! What type of pet would you like to buy?");
 	
-	// 2. Add the following variable to the next line: static int happinessLevel = 0;
-	// this will be used to store the happiness of your pet
 	
+
 	public static void main(String[] args) {
-		// 1. Ask the user what kind of pet they want to buy, and store their answer in a variable
 
-		// 7. REPEAT steps 3 - 6 enough times to make your pet happy!
+		for (;happinessLevel < 50;) {
+			
+			
+			if(pet.equals ("half-elf")) {
 		
-			// 3. Use showOptionDialog to ask the user what they want to do to make their pet happy
-			//    (eg: cuddle, food, water, take a walk, groom, clean up poop).
-			//    Make sure to customize the title and question too.
-			int task = JOptionPane.showOptionDialog(null, "Question", "Title", 0, JOptionPane.INFORMATION_MESSAGE, null,
-					new String[] { "Button1", "Button2", "Button3" }, null);
+				JOptionPane.showMessageDialog(null,"SHAME ON YOU!");
+				pet = "slave";
+			}
+			if(pet.equals ("tarrasque")) {
+				
+				JOptionPane.showMessageDialog(null,"...Wow, such an ORIGINAL idea...");
+				pet = "ORIGINAL PET";
+			}
+			if(happinessLevel < 0) {
+				
+				JOptionPane.showMessageDialog(null, "Oh nose! your " + pet + " ran away!");
+				break;
+			}
 
-			// 5. Use user input to call the appropriate method created in step 4.
+			int task = JOptionPane.showOptionDialog(null, "What would you like to do with your " + pet + "? Your "+ pet + "'s happiness = "+ happinessLevel, "Action", 0, JOptionPane.INFORMATION_MESSAGE, null,
+					new String[] {"Stop Game", "Sleep till 'morrow", "Feed", "Pet", "Play" }, null);
 
-			// 6. If you determine the happiness level is large enough, tell the
-			//    user that he loves his pet and use break; to exit for loop.
+			if(task == 4) {
+				
+				play();
+				timefromfeed++;
+			}
+			else if(task == 3) {
+				
+				pet();
+				timefromfeed++;
+			}
+			else if(task == 2) {
+				
+				feed();
+				timefromfeed = 0;
+			}
+			else if(task == 1) {
+				
+				sleep();
+				timefromfeed++;
+				timefromfeed++;
+			}
+			else if(task == 0) {
+				
+				break;
+				
+			}
+			
+			if(timefromfeed >= 7) {
+				
+				JOptionPane.showMessageDialog(null, "Your " + pet + " starved and kicked the bucket. Dont buy from us again, MONSTER!");
+				break;
+				}
+			}
+		
+		System.out.println(happinessLevel);
+		
+	
+	
+	if(happinessLevel >= 50) {
+		
+		JOptionPane.showMessageDialog(null, "Your " + pet + " is now so happy, it will be loyal for ever! YOU WON!");
+		
+		}
+	}
+	
+	static void play() {
+
+		if(timeplay == 1) {
+			JOptionPane.showMessageDialog(null,"You play with your " + pet + ".");
+			happinessLevel = happinessLevel + 5 ;
+			
+			}
+		
+		if(timeplay == 2) {
+			JOptionPane.showMessageDialog(null,"You play with your " + pet + ".");
+			happinessLevel = happinessLevel + 5 ;
+		
+			}
+		
+		if(timeplay >= 3) {
+			JOptionPane.showMessageDialog(null,"Your " + pet + " is now tired. Maybe tomorrow!");
+			happinessLevel = happinessLevel - 5 ;
+			}
+			timeplay++;
 
 	}
+	
+	
+	static void pet() {
+		
+		JOptionPane.showMessageDialog(null, "You pet your " + pet + ".");
+		
+		happinessLevel++;
+	}
+	
+	static void feed() {
+		
+		if(timefeed == 1) {
+		JOptionPane.showMessageDialog(null, "You feed your " + pet + " some grub.");
+		
+		happinessLevel = happinessLevel + 5;
+		}
+		
+		if(timefeed >= 2) {
+			
+			JOptionPane.showMessageDialog(null, "Your " + pet + " is stuffed! Maybe tommorow!");
+			happinessLevel = happinessLevel - 5;
+		}
+		timefeed++;
+	}
 
-	// 4. Create methods to handle each of your user selections.
-	//    Each method should create a pop-up with the pet's response (eg. cat might purr when pet), 
-	//    and INCREMENT the pet's happiness Level.
+	static void sleep() {
+		
+		timeplay = 0;
+		timefeed = 0;
+		JOptionPane.showMessageDialog(null, "You sleep till tommorow. Your " + pet + " is refreshed!");
+		
+	}
 }
